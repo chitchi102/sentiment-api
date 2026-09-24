@@ -15,4 +15,4 @@ def encode_batch(tokenizer,texts,max_len=64):
         ids = ids[:max_len]
         ids = ids + [0] * (max_len-len(ids))
         row.append(ids)
-    return torch.tensor(row)
+    return torch.tensor(row,dtype=torch.long)
