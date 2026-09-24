@@ -1,6 +1,6 @@
 """手順6のテスト（app.py）。サーバーを立てずに POST /predict を叩く。
 
-リポジトリ直下の model.pt / tokenizer.json（手順3の `python train.py` で作ったもの）を使う。
+リポジトリ直下の model.pt / tokenizer.json（手順4の `python train.py` で作ったもの）を使う。
 実行: pytest tests/test_6_app.py
 """
 

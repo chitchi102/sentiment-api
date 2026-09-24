@@ -1,7 +1,7 @@
-"""手順3のテスト（train.py）。偽 SST-2 で run まで回す。10秒前後。
+"""手順4のテスト（train.py）。偽 SST-2 で run まで回す。10秒前後。
 
 train.py は data / tokens / model / artifacts を import して、部品を上から順に呼ぶだけのファイル。
-実行: pytest tests/test_3_train.py
+実行: pytest tests/test_4_train.py
 """
 
 import pytest
