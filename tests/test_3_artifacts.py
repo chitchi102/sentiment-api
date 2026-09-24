@@ -1,6 +1,6 @@
-"""手順4のテスト（artifacts.py と predict.py）。保存 → 読み戻し → 1文を分類。
+"""手順3のテスト（artifacts.py と predict.py）。保存 → 読み戻し → 1文を分類。
 
-実行: pytest tests/test_4_artifacts.py
+実行: pytest tests/test_3_artifacts.py
 """
 
 import pytest
