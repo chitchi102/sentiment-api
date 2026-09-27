@@ -58,3 +58,9 @@ def test_teacher_beats_the_student_on_100_validation_sentences(loaded):
     acc = (out.argmax(1) == torch.tensor(y_val[:100])).float().mean().item()
     assert out.shape == (100, 2)
     assert acc >= 0.85, f"先頭100件の正解率: {acc:.3f}"
+
+
+def test_load_teacher_moves_the_teacher_to_the_device():
+    """S1b: load_teacher(device) で先生の重みがその置き場へ動くこと（手元は GPU が無いので meta で見る）。"""
+    _, m = teacher.load_teacher(device="meta")
+    assert {p.device.type for p in m.parameters()} == {"meta"}
