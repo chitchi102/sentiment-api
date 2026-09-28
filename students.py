@@ -3,7 +3,7 @@ import train,data,tokens,model,quantize,artifacts
 
 def run_student(mode,teacher_path="teacher_logits.pt",n_label=2000,epochs=3,seed=0,out_dir=None,device="cpu"):
     if mode not in ["small","teacher","full"]:
-        raise ValueError(f"{mode} must be in small,teacher,orfull!")
+        raise ValueError(f"{mode} must be in small,teacher or full!")
     teacher_logits = torch.load(teacher_path)["train_logits"]
     data_size = len(teacher_logits)
     x_all_train,y_all_train,x_validation,y_validation = data.load_data(n_train=data_size)
