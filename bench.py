@@ -9,7 +9,7 @@ def compare(model,x,y):
             {"name":"int8","size_mb":quantize.model_size_mb(quantized_model),"acc":train.evaluate(quantized_model,x,y),"seconds":quantize.time_inference(quantized_model,x)}]
 
 if __name__ == "__main__":
-    out_dir = "."
+    out_dir = "student_teacher"
     model,tokenizer = artifacts.load_artifacts(out_dir)
     x_train,y_train,x_validation,y_validation = data.load_data(n_train=1)
     x_validation = tokens.encode_batch(tokenizer,x_validation)
