@@ -4,7 +4,7 @@ import predict
 
 import artifacts,quantize
 
-model, tokenizer = artifacts.load_artifacts()
+model, tokenizer = artifacts.load_artifacts(out_dir="student_teacher/")
 model = quantize.quantize_int8(model)
 
 app = FastAPI()

@@ -6,7 +6,8 @@ COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY app.py artifacts.py predict.py tokens.py model.py quantize.py model.pt tokenizer.json ./
+COPY app.py artifacts.py predict.py tokens.py model.py quantize.py ./
+COPY student_teacher/model.pt student_teacher/tokenizer.json student_teacher/
 
 EXPOSE 7860
 

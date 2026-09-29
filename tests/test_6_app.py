@@ -1,6 +1,6 @@
 """手順6のテスト（app.py）。サーバーを立てずに POST /predict を叩く。
 
-リポジトリ直下の model.pt / tokenizer.json（手順4の `python train.py` で作ったもの）を使う。
+周3 S5 から、配るのは student_teacher/ の model.pt / tokenizer.json（生徒②）。
 実行: pytest tests/test_6_app.py
 """
 
@@ -18,8 +18,8 @@ from conftest import ROOT  # noqa: E402
 
 @pytest.fixture(scope="module")
 def app_module():
-    if not (ROOT / "model.pt").exists():
-        pytest.skip("model.pt が無い（先に python train.py）")
+    if not (ROOT / "student_teacher" / "model.pt").exists():
+        pytest.skip("student_teacher/model.pt が無い（周3 S3 で保存した生徒②）")
     here = os.getcwd()
     os.chdir(ROOT)
     try:

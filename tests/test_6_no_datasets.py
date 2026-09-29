@@ -17,8 +17,8 @@ SCRIPT = "import sys; sys.modules['datasets'] = None; import app; print('ok')"
 
 
 def test_app_starts_without_datasets():
-    if not (ROOT / "model.pt").exists():
-        pytest.skip("model.pt が無い（先に python train.py）")
+    if not (ROOT / "student_teacher" / "model.pt").exists():
+        pytest.skip("student_teacher/model.pt が無い（周3 S3 で保存した生徒②）")
     r = subprocess.run([sys.executable, "-c", SCRIPT], cwd=ROOT, capture_output=True, text=True)
     assert r.returncode == 0, "datasets が無いと app が起動しない:\n" + r.stderr[-800:]
     assert "ok" in r.stdout
