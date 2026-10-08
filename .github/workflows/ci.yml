@@ -24,3 +24,35 @@ jobs:
         run: pip install -r requirements-dev.txt
       - name: Run tests without real data or model downloads
         run: pytest tests --ignore=tests/test_2_data_real.py --ignore=tests/test_7_teacher_real.py
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t sentiment-api:ci .
+      - name: Start container
+        run: docker run -d --name api -p 7860:7860 sentiment-api:ci
+      - name: Wait for /healthz
+        run: |
+          for i in $(seq 1 30); do
+            if curl -fsS http://localhost:7860/healthz; then echo; exit 0; fi
+            sleep 2
+          done
+          echo "healthz did not answer within 60s"
+          docker logs api
+          exit 1
+      - name: Check /healthz body
+        run: |
+          body=$(curl -fsS http://localhost:7860/healthz)
+          echo "$body"
+          test "$body" = '{"status":"ok"}'
+      - name: Call /predict
+        run: |
+          curl -fsS -X POST http://localhost:7860/predict \
+            -H 'Content-Type: application/json' \
+            -d '{"text": "a wonderful film"}'
+          echo
+      - name: Show container logs on failure
+        if: failure()
+        run: docker logs api || true
